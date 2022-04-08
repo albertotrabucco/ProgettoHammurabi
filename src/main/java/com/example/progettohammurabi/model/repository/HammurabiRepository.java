@@ -8,7 +8,7 @@ import java.util.List;
 
 public class HammurabiRepository {
 
-    static final String DB_URL = "jdbc:mysql://localhost:3306/java";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/java";  //cambiare la porta in 8080 quando si è in engim e 3306 quando a casa
     static final String USER = "java";
     static final String PASS = "java";
 
@@ -34,23 +34,47 @@ public class HammurabiRepository {
         }
         return dati;
     }
-}
 
-    /*public static String createTable(){
+
+    public static String createTable(){
         try{
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            stmt.execute("create table hammurabi2 (" +
-                    "pop NOT NULL INTEGER(3) SET DEFAULT 10," +
-                    "grano NOT NULL INTEGER(4) SET DEFAULT 30, " +
-                    "terreno NOT NULL INTEGER(2) SET DEFAULT 0)");
-            stmt.execute("insert into hammurabi2 values(,'','')");
-            ResultSet rs = stmt.executeQuery("select * from hammurabi2");
-        } catch (SQLException e) {
+            stmt.executeUpdate("CREATE TABLE hammurabi" +
+                    "(pop INTEGER(3) DEFAULT 10," +
+                    "grano INTEGER(4) DEFAULT 30, " +
+                    "terreno INTEGER(2) DEFAULT 0)");
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
         return "Tabella Creata!";
     }
 
-}*/
+
+    public static String setDati(){ //1turno inizio partita
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT INTO hammurabi (pop,grano,terreno) VALUE (DEFAULT (pop), DEFAULT (grano), DEFAULT (terreno))");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Dati turno 1 inizializzati ai valori di default con successo!";
+    }
+
+
+    public static String deleteTable(){
+        try{
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DROP TABLE hammurabi");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Tabella cancellata con successo!";
+    }
+}
