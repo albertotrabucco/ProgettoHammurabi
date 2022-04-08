@@ -1,7 +1,7 @@
 package com.example.progettohammurabi.model;
 
 public class Hammurabi {
-
+    private int turno;
     private int population;
     private int wheat;
     private int land;
@@ -9,7 +9,8 @@ public class Hammurabi {
     public Hammurabi() {
     }
 
-    public Hammurabi(int population, int wheat, int land) {
+    public Hammurabi(int turno, int population, int wheat, int land) {
+        this.turno = turno;
         this.population = population;
         this.wheat = wheat;
         this.land = land;
@@ -39,10 +40,19 @@ public class Hammurabi {
         this.land = land;
     }
 
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
     @Override
     public String toString() {
         return "Hammurabi{" +
-                "population=" + population +
+                "turno=" + turno +
+                ", population=" + population +
                 ", wheat=" + wheat +
                 ", land=" + land +
                 '}';
